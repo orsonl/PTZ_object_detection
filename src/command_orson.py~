@@ -1,0 +1,65 @@
+#!/usr/bin/env python
+
+import rospy
+import urllib2
+import urllib2 as ul
+import time
+import cv2
+from sensor_msgs.msg import Joy
+
+
+
+
+
+## Time for the camera to rotate 360 (panning)
+
+## Time for the camera to rotate 90  (tilting)
+
+## Time for the camera to zoom from 0 to 20 (zooming)
+
+
+
+
+ip_right = 'http://10.10.10.13/?command=ptz_req&req=start&param=directionleft&channel=1&stream=0'
+ip_left = 'http://10.10.10.13/?command=ptz_req&req=start&param=directionright&channel=1&stream=0'
+ip_up = 'http://10.10.10.13/?command=ptz_req&req=start&param=directiondown&channel=1&stream=0'
+ip_down = 'http://10.10.10.13/?command=ptz_req&req=start&param=directionup&channel=1&stream=0'
+ip_zoomIn = 'http://10.10.10.13/?command=ptz_req&req=start&param=zoomtile&channel=1&stream=0'
+ip_zoomOut = 'http://10.10.10.13/?command=ptz_req&req=start&param=zoomwide&channel=1&stream=0'
+ip_stop = 'http://10.10.10.13/?command=ptz_req&req=stop&param=directionright&channel=1&stream=0'
+
+
+
+
+
+
+if __name__== '__main__':
+#        i=0
+#	start_time = time.time()
+#	while i<36: 
+#		response = ul.urlopen(ip_right)
+#		response = ul.urlopen(ip_stop )
+#		i=i+1
+#        print("--- %s seconds ---" % (time.time() - start_time))
+#	print i
+	response = ul.urlopen(ip_zoomIn)
+	print '1'
+	response = ul.urlopen(ip_stop)
+	response = ul.urlopen(ip_zoomIn)
+	response = ul.urlopen(ip_stop )
+	response = ul.urlopen(ip_zoomOut)
+	response = ul.urlopen(ip_stop)
+	response = ul.urlopen(ip_zoomOut)
+	response = ul.urlopen(ip_stop)
+
+	response = ul.urlopen(ip_right)
+        
+        #rospy.sleep(32.)
+	rospy.sleep(4)
+	response = ul.urlopen(ip_stop )
+	response = ul.urlopen(ip_left)
+	rospy.sleep(4)
+	response = ul.urlopen(ip_stop)
+
+
+
